@@ -7,7 +7,7 @@ export const connectPassport = () => {
     passport.use(new GoogleStrategy({
         clientID: process.env.CLIENTID,
         clientSecret: process.env.CLIENTSECRET,
-        callbackURL: "http://localhost:4000/api/v1/login",
+        callbackURL: process.env.GOOGLE_CALLBACK,
     }, async function (accessToken, refreshToken, profile, done) {
 
         const user = await User.findOne({
