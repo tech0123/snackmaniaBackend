@@ -4,6 +4,8 @@ const schema = new mongoose.Schema({
 
     name: String,
     phone: String,
+    photo: String,
+    
     googleId:{
         type: String,
         required : true,
