@@ -23,9 +23,9 @@ app.use(session({
     saveUninitialized: false,
 
     cookie: {
-        secure: process.env.NODE_ENV = "development" ? false : true,
-        httpOnly: process.env.NODE_ENV = "development" ? false : true,
-        sameSite: process.env.NODE_ENV = "development" ? false : "none",
+        secure: process.env.NODE_ENV === "development" ? false : true,
+        httpOnly: process.env.NODE_ENV === "development" ? false : true,
+        sameSite: process.env.NODE_ENV === "development" ? false : "none",
     }
 }))
 
@@ -42,9 +42,9 @@ app.use(cors({
 
 }))
 
-app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.authenticate("session"));
 app.enable("trust proxy");
 
 connectPassport();
