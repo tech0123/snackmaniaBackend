@@ -1,6 +1,6 @@
 import express from "express";
 import { authorizeAdmin, isAuthenticated } from "../middlewares/auth.js";
-import { getAdminOrders, getMyOrders, getOrderDetails, paymentVerification, placeOrder, placeOrderOnline, processOrder } from "../controllers/order.js";
+import { getAdminOrders, getMyOrders, getOrderDetails, paymentVerification, placeOrder, placeOrderOnline, processOrder, razorKey } from "../controllers/order.js";
 
 const router = express.Router();
 
@@ -14,5 +14,6 @@ router.get("/order/:id", isAuthenticated, getOrderDetails);
 router.get("/admin/orders", isAuthenticated, authorizeAdmin, getAdminOrders);
 router.get("/admin/order/:id", isAuthenticated, authorizeAdmin, processOrder);
 
+router.get("/razorkey", isAuthenticated, razorKey);
 
 export default router;
