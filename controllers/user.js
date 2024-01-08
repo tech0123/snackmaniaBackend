@@ -6,16 +6,29 @@ import ErrorHandler from "../utils/ErrorHandler.js";
 
 export const myProfile = (req, res, next) => {
 
-    try {
+    if (req.user) {
+
         res.status(200).json({
             status: true,
             user: req.user,
         })
-        
-    } catch (error) {
-        return next(new ErrorHandler("Not Logged In", 401));
+
+    } else {
+
+        req.session.destroy((err) => {
+
+            if (err) return next(err);
+
+            res.clearCookie("connect.sid", {
+                secure: process.env.NODE_ENV === "development" ? false : true,
+                httpOnly: process.env.NODE_ENV === "development" ? false : true,
+                sameSite: process.env.NODE_ENV === "development" ? false : "none",
+            });
+            return next(new ErrorHandler("Not Logged In", 401));
+        })
+
     }
-    
+
 
 }
 
