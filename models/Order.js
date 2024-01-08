@@ -4,7 +4,7 @@ const schema = new mongoose.Schema({
 
 
     shippingInfo: {
-        hNo: {
+        address: {
             type: String,
             required: true,
         },
@@ -26,7 +26,7 @@ const schema = new mongoose.Schema({
             required: true,
         },
 
-        phoneNumber: {
+        mobile: {
             type: Number,
             required: true,
         },
