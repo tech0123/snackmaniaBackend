@@ -1,14 +1,21 @@
 import { asyncError } from "../middlewares/errorMiddleware.js";
 import { User } from "../models/User.js";
 import { Order } from "../models/Order.js";
+import ErrorHandler from "../utils/ErrorHandler.js";
 
 
 export const myProfile = (req, res, next) => {
 
-    res.status(200).json({
-        status: true,
-        user: req.user,
-    })
+    try {
+        res.status(200).json({
+            status: true,
+            user: req.user,
+        })
+        
+    } catch (error) {
+        return next(new ErrorHandler("Not Logged In", 401));
+    }
+    
 
 }
 
